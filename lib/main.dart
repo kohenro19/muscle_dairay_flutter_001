@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: '筋トレダイアリー'),
     );
   }
 }
@@ -65,25 +66,23 @@ class _MyHomePageState extends State<MyHomePage> {
     List<Map> list = [
     {
       "time": "2020-06-16T10:31:12.000Z",
-      "message":
-          "P2 BGM-01 HV buiten materieel (Gas lekkage) Franckstraat Arnhem 073631"
+      "category": "肩"
     },
     {
       "time": "2020-06-16T10:29:35.000Z",
-      "message": "A1 Brahmslaan 3862TD Nijkerk 73278"
+      "category": "大胸筋"
     },
     {
       "time": "2020-06-16T10:29:35.000Z",
-      "message": "A2 NS Station Rheden Dr. Langemijerweg 6991EV Rheden 73286"
+      "category": "脚"
     },
     {
       "time": "2020-06-15T09:41:18.000Z",
-      "message": "A2 VWS Utrechtseweg 6871DR Renkum 74636"
+      "category": "背中"
     },
     {
       "time": "2021-06-14T09:40:58.000Z",
-      "message":
-          "B2 5623EJ : Michelangelolaan Eindhoven Obj: ziekenhuizen 8610 Ca CATH route 522 PAAZ Rit: 66570"
+      "category": "腹筋"
     }
   ];
 
@@ -107,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
             itemBuilder: (_, index) {
               bool isSameDate = true;
               final String dateString = list[index]['time'];
-              final DateTime date = DateTime.parse(dateString);
+              final DateTime date = DateTime.parse(dateString); // DateTme型に変換
               final item = list[index];
               if (index == 0) {
                 isSameDate = false;
@@ -119,13 +118,18 @@ class _MyHomePageState extends State<MyHomePage> {
               if (index == 0 || !(isSameDate)) {
                 return Column(children: [
                   Text(date.formatDate()),
-                  ListTile(title: Text('item $index'))
+                  ListTile(title: Text(list[index]['category']))
                 ]);
               } else {
-                return ListTile(title: Text('item $index'));
+                return ListTile(title: Text(list[index]['category']));
               }
             }
         ),
+      ), 
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
