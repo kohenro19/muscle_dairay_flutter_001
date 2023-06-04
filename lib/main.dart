@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 // import 'package:google_fonts/google_fonts.dart';
+import 'note_card.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Muscle Diary',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
         //   Theme.of(context).textTheme
         // ),
       ),
-      home: const MyHomePage(title: '筋トレダイアリー'),
+      home: const MyHomePage(title: 'Muscle Diary'),
     );
   }
 }
@@ -105,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: ListView.builder(
-                      itemCount: list.length,
+            itemCount: list.length,
             itemBuilder: (_, index) {
               bool isSameDate = true;
               final String dateString = list[index]['time'];
@@ -121,10 +122,10 @@ class _MyHomePageState extends State<MyHomePage> {
               if (index == 0 || !(isSameDate)) {
                 return Column(children: [
                   Text(date.formatDate()),
-                  ListTile(title: Text(list[index]['category']))
+                  Notecard(title: list[index]['category'].toString())
                 ]);
               } else {
-                return ListTile(title: Text(list[index]['category']));
+                return Notecard(title: list[index]['category'].toString());
               }
             }
         ),
@@ -147,6 +148,7 @@ extension DateHelper on DateTime {
      final formatter = DateFormat(dateFormatter);
       return formatter.format(this);
   }
+
   bool isSameDate(DateTime other) {
     // 151行目のthis.yearは、112行目で定義されたDateTimeオブジェクトdateと関連している
     // thisは現在のインスタンス自体を指す
