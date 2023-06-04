@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
+// import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,6 +26,9 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.blue,
+        // textTheme: GoogleFonts.sawarabiGothicTextTheme(
+        //   Theme.of(context).textTheme
+        // ),
       ),
       home: const MyHomePage(title: '筋トレダイアリー'),
     );
@@ -145,6 +148,8 @@ extension DateHelper on DateTime {
       return formatter.format(this);
   }
   bool isSameDate(DateTime other) {
+    // 151行目のthis.yearは、112行目で定義されたDateTimeオブジェクトdateと関連している
+    // thisは現在のインスタンス自体を指す
     return this.year == other.year &&
         this.month == other.month &&
         this.day == other.day;
