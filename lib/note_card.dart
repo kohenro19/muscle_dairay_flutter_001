@@ -25,7 +25,9 @@ class _NotecardState extends State<Notecard> {
             color: Colors.red,
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(30),
-              bottomRight: Radius.circular(30)
+              topLeft: Radius.circular(30),
+              bottomRight: Radius.circular(30),
+              bottomLeft: Radius.circular(30)
             )
           ),
         );

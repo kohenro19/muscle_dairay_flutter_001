@@ -72,33 +72,33 @@ class _MyHomePageState extends State<MyHomePage> {
       "time": "2020-06-16T10:31:12.000Z",
       "category": "肩",
       "exercise": "サイドレイズ",
-      // "weight": 12
+      "weight": 12
     },
     {
       "time": "2020-06-16T10:29:35.000Z",
       "category": "大胸筋",
       "exercise": "ベンチプレス",
-      // "weight": 90
+      "weight": 90
 
     },
     {
       "time": "2020-06-16T10:29:35.000Z",
       "category": "脚",
       "exercise": "レッグエクステンション",
-      // "weight": 30
+      "weight": 30
 
     },
     {
       "time": "2020-06-15T09:41:18.000Z",
       "category": "背中",
       "exercise": "ラットプルダウン",
-      // "weight": 45
+      "weight": 45
     },
     {
       "time": "2021-06-14T09:40:58.000Z",
       "category": "腹筋",
       "exercise": "シットアップ",
-      // "weight": 10
+      "weight": 10
     }
   ];
 
@@ -132,14 +132,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 isSameDate = date.isSameDate(prevDate);
               }
               if (index == 0 || !(isSameDate)) {
-                return Column(children: [
-                  Text(date.formatDate()),
-                  Notecard(title: list[index]['category'].toString())
-                ]);
+                return Padding(
+                  padding: EdgeInsets.all(2), // 隣のColumnとの間に余白を付ける
+                  child: Column(children: [
+                    Text(date.formatDate()),
+                    Notecard(title: list[index]['category'].toString())
+                  ]),
+                );
               } else {
-                return Column(children: [ // Columnがないと横幅が広がる
-                  Notecard(title: list[index]['category'].toString())
-                ]);
+                return Padding(
+                  padding: EdgeInsets.all(2), // 隣のColumnとの間に余白を付ける
+                  child: Column(children: [ // Columnがないと横幅が広がる
+                    Notecard(title: list[index]['category'].toString())
+                  ]),
+                );
                 
               }
             }
