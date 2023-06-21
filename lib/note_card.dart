@@ -39,27 +39,39 @@ class _NotecardState extends State<Notecard> {
     //       ),
     //     );
     return ClipRRect(
-      borderRadius: const BorderRadius.all(Radius.circular(16.0)),
-      child: Stack(
-        children: <Widget>[
-          Column(
-            children: <Widget>[
-              AspectRatio(
-                aspectRatio: 2,
-                child: Image.asset(
-                  "images/happiness.jpg",
-                  fit: BoxFit.cover,
+          borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+        child: Stack(
+          children: <Widget>[
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 40,
+                      backgroundColor: Colors.blueGrey,
+                      child: Image.asset(
+                        "images/happiness.jpg",
+                        width: 20,
+                        height: 20,
+                      ),
+                    ),
+                  Text("80 kg")
+                  ]
                 ),
-              ),
-              Container(
-                height: 10,
-                color: Colors.red,
-              )
-            ]
-          ),
-           ],
-      ),
-    );       
+                Container(
+                  height: 50,
+                  color: Colors.red,
+                  child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                        )
+                )
+              ]
+            ),
+             ],
+        ),
+      );
   }
 
 }
