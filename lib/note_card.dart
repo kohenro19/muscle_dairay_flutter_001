@@ -38,8 +38,29 @@ class _NotecardState extends State<Notecard> {
     //         )
     //       ),
     //     );
-    return ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+    return Container(
+          // borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+        width: MediaQuery.of(context).size.width-2,
+        height: 130,
+        // color: Colors.red,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(30),
+            bottomRight: Radius.circular(30)
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Color(0xFFd8dbe0),
+              offset: Offset(1, 1),
+              blurRadius: 20.0,
+              spreadRadius: 10
+              // 
+              )
+            
+          ]
+
+        ),
         child: Stack(
           children: <Widget>[
             Column(
@@ -56,12 +77,20 @@ class _NotecardState extends State<Notecard> {
                         height: 20,
                       ),
                     ),
-                  Text("80 kg")
+                  Padding(
+                    padding: EdgeInsets.only(top: 10, right: 20, bottom: 30, left: 40),
+                    child: Container(
+                      // color: Colors.blue,
+                      width: 100,
+                      child: Text("サイドレイズ"),
+                    ),
+                    
+                  )
                   ]
                 ),
                 Container(
                   height: 50,
-                  color: Colors.red,
+                  // color: Colors.red,
                   child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
