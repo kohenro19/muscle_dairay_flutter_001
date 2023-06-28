@@ -41,7 +41,7 @@ class _NotecardState extends State<Notecard> {
     return Container(
           // borderRadius: const BorderRadius.all(Radius.circular(16.0)),
         width: MediaQuery.of(context).size.width-2,
-        height: 130,
+        height: 80,
         // color: Colors.red,
         decoration: BoxDecoration(
           color: Colors.white,
@@ -61,9 +61,7 @@ class _NotecardState extends State<Notecard> {
           ]
 
         ),
-        child: Stack(
-          children: <Widget>[
-            Column(
+        child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Row(
@@ -72,35 +70,35 @@ class _NotecardState extends State<Notecard> {
                       radius: 40,
                       backgroundColor: Colors.blueGrey,
                       child: Image.asset(
-                        "images/happiness.jpg",
+                        "images/chest.png",
                         width: 20,
                         height: 20,
                       ),
                     ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 10, right: 20, bottom: 30, left: 40),
-                    child: Container(
-                      // color: Colors.blue,
-                      width: 100,
-                      child: Text("サイドレイズ"),
+                    SizedBox(width: 10),
+                  // Padding(
+                  //   padding: EdgeInsets.only(top: 10, right: 20, bottom: 30, left: 40),
+                    Column(
+                      children: <Widget>[
+                        Container(
+                        // color: Colors.blue,
+                        width: 100,
+                        child: Text("サイドレイズ"),
+                      ),
+                      Container(
+                        child: Text("80kg"),
+                      )
+                      ]
                     ),
                     
-                  )
+                  // )
                   ]
                 ),
-                Container(
-                  height: 50,
-                  // color: Colors.red,
-                  child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                        )
-                )
+
               ]
             ),
-             ],
-        ),
-      );
+          
+        );
   }
 
 }
