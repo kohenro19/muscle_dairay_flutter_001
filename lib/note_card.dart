@@ -40,6 +40,7 @@ class _NotecardState extends State<Notecard> {
     //     );
     return Container(
           // borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+        margin: const EdgeInsets.only(top: 5, bottom: 5),
         width: MediaQuery.of(context).size.width-2,
         height: 80,
         // color: Colors.red,
@@ -66,27 +67,30 @@ class _NotecardState extends State<Notecard> {
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    CircleAvatar(
-                      radius: 40,
-                      backgroundColor: Colors.blueGrey,
-                      child: Image.asset(
-                        "images/chest.png",
-                        width: 20,
-                        height: 20,
-                      ),
-                    ),
                     SizedBox(width: 10),
+                    CircleAvatar(
+                      radius: 30,
+                      child: Text("肩"),
+                    ),
+                    SizedBox(width: 30),
                   // Padding(
                   //   padding: EdgeInsets.only(top: 10, right: 20, bottom: 30, left: 40),
-                    Column(
+                    Row(
                       children: <Widget>[
                         Container(
                         // color: Colors.blue,
-                        width: 100,
-                        child: Text("サイドレイズ"),
+                        width: 120,
+                        child: Text("サイドレイズ",
+                          style: TextStyle(
+                          // fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          // color: Theme.of(context).primaryColor,
+                          ),
+                        ),
                       ),
+                      SizedBox(width: 40),
                       Container(
-                        child: Text("80kg"),
+                        child: Text("80kg", style: TextStyle(fontSize: 18),),
                       )
                       ]
                     ),
