@@ -1,8 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-// import 'package:google_fonts/google_fonts.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'note_card.dart';
+import 'dart:typed_data';
 
 void main() {
   runApp(const MyApp());
@@ -27,9 +28,9 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.blue,
-        // textTheme: GoogleFonts.sawarabiGothicTextTheme(
-        //   Theme.of(context).textTheme
-        // ),
+        textTheme: GoogleFonts.satisfyTextTheme(
+          Theme.of(context).textTheme
+        ),
       ),
       home: const MyHomePage(title: 'Muscle Diary'),
     );
@@ -136,14 +137,22 @@ class _MyHomePageState extends State<MyHomePage> {
                   padding: EdgeInsets.all(2), // 隣のColumnとの間に余白を付ける
                   child: Column(children: [
                     Text(date.formatDate()),
-                    Notecard(title: list[index]['category'].toString())
+                    Dismissible(
+                      key: Key(list[index].toString()), 
+                      child: Notecard(title: list[index]['category'].toString()),
+                      direction: DismissDirection.horizontal,
+                    )
                   ]),
                 );
               } else {
                 return Padding(
                   padding: EdgeInsets.all(2), // 隣のColumnとの間に余白を付ける
                   child: Column(children: [ // Columnがないと横幅が広がる
-                    Notecard(title: list[index]['category'].toString())
+                    Dismissible(
+                      key:Key(list[index].toString()),
+                      child: Notecard(title: list[index]['category'].toString()),
+                      direction: DismissDirection.horizontal,
+                    )
                   ]),
                 );
                 

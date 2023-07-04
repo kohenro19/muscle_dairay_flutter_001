@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'note.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 
 class Notecard extends StatefulWidget {
   final String title;
@@ -18,26 +20,6 @@ class _NotecardState extends State<Notecard> {
   @override
   Widget build(BuildContext context) {
 
-    // return Container(
-    //       height: 130,
-    //       width: MediaQuery.of(context).size.width-20,
-    //       decoration: BoxDecoration(
-    //         // image: AssetImage(),
-    //         boxShadow: [
-    //           BoxShadow(
-    //             // blurRadius: 40,
-    //             offset: Offset(8, 10)
-    //           )
-    //         ],
-    //         color: Colors.red,
-    //         borderRadius: BorderRadius.only(
-    //           topRight: Radius.circular(30),
-    //           topLeft: Radius.circular(30),
-    //           bottomRight: Radius.circular(30),
-    //           bottomLeft: Radius.circular(30)
-    //         )
-    //       ),
-    //     );
     return Container(
           // borderRadius: const BorderRadius.all(Radius.circular(16.0)),
         margin: const EdgeInsets.only(top: 5, bottom: 5),
@@ -91,7 +73,12 @@ class _NotecardState extends State<Notecard> {
                       SizedBox(width: 40),
                       Container(
                         child: Text("80kg", style: TextStyle(fontSize: 18),),
-                      )
+                      ),
+                      SizedBox(width: 40),
+                      IconButton(onPressed: () {
+            // アイコンが押されたときの処理
+            print('Icon Pressed');
+          }, icon: Icon(Icons.edit_outlined))
                       ]
                     ),
                     
