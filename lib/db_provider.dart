@@ -54,7 +54,7 @@ class DBProvider {
   }
 
   // function to add data into the database.
-  Future<void> insertFavorite(Meigen favorite) async {
+  Future<void> insertFavorite(Note note) async {
     final db = await database;
     await db.insert(
       'favorite',
@@ -74,15 +74,15 @@ class DBProvider {
     return result;
   }
 
- Future<List<Meigen>> read() async {
+ Future<List<Note>> read() async {
     final db = await database;
     final List<Map<String, dynamic>> maps = await db.query('favorite');
     return List.generate(maps.length, (index) {
-      return Meigen(
-        message_no: maps[index]['message_no'],
-        message: maps[index]['message'],
-        author: maps[index]['author'],
-        category: maps[index]['category']
+      return Note(
+        date: maps[index]['date'],
+        category: maps[index]['category'],
+        exercise: maps[index]['exercise'],
+        weight: maps[index]['weight']
       );
     });
   }
