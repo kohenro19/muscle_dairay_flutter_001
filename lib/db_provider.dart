@@ -42,10 +42,10 @@ class DBProvider {
       onCreate: (db, version) async {
         await db.execute('''
             CREATE TABLE favorite(
-            message_no INTERGER,
-            message String,
-            author String,
-            category INTERGER
+            no INTERGER,
+            category String,
+            workout String,
+            weight INTERGER
             ) '''         
         );
       },
@@ -54,36 +54,47 @@ class DBProvider {
   }
 
   // function to add data into the database.
-  Future<void> insertFavorite(Note note) async {
+  Future<void> insertNotesg(Note note) async {
     final db = await database;
     await db.insert(
-      'favorite',
-      favorite.toMap(),
+      'note',
+      note.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
   // function to delete data form the database.
-  Future<int> deleteFavorite(int message_no) async {
+  Future<int> deleteNote(int no) async {
     final db = await database;
     int result = await db.delete(
-      'favorite',
-      where: 'message_no == ?',
-      whereArgs: [message_no],
+      'note',
+      where: 'no == ?',
+      whereArgs: [no],
     );
     return result;
   }
 
- Future<List<Note>> read() async {
+ Future<List<Note>> getNotes() async {
     final db = await database;
-    final List<Map<String, dynamic>> maps = await db.query('favorite');
+    final List<Map<String, dynamic>> maps = await db.query('no');
     return List.generate(maps.length, (index) {
       return Note(
+        no: maps[index]['no'],
         date: maps[index]['date'],
         category: maps[index]['category'],
         exercise: maps[index]['exercise'],
         weight: maps[index]['weight']
       );
     });
+  }
+
+   Future<void> updateUser(int id, String category, String exercise, int weight) async {
+    final db = await database;
+    await db.update(
+      'note',
+      {'category': category, 'exercise': exercise, 'weigth': weight},
+      where: 'id = ?',
+      whereArgs: [id],
+    );
   }
 }
