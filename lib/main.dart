@@ -2,8 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:muscle_dairay/add_note_page.dart';
 import 'note_card.dart';
 import 'db_provider.dart';
+import 'package:muscle_dairay/Note.dart';
 
 void main() {
   runApp(const MyApp());
@@ -115,53 +117,76 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: ListView.builder(
-            itemCount: list.length,
-            itemBuilder: (_, index) {
-              bool isSameDate = true;
-              final String dateString = list[index]['time'];
-              final DateTime date = DateTime.parse(dateString); // DateTme型に変換
-              final item = list[index];
-              if (index == 0) {
-                isSameDate = false;
-              } else {
-                final String prevDateString = list[index - 1]['time'];
-                final DateTime prevDate = DateTime.parse(prevDateString);
-                isSameDate = date.isSameDate(prevDate);
-              }
-              if (index == 0 || !(isSameDate)) {
-                return Padding(
-                  padding: EdgeInsets.all(2), // 隣のColumnとの間に余白を付ける
-                  child: Column(children: [
-                    Text(date.formatDate()),
-                    Dismissible(
-                      key: Key(list[index].toString()), 
-                      child: Notecard(title: list[index]['category'].toString()),
-                      direction: DismissDirection.horizontal,
-                    )
-                  ]),
-                );
-              } else {
-                return Padding(
-                  padding: EdgeInsets.all(2), // 隣のColumnとの間に余白を付ける
-                  child: Column(children: [ // Columnがないと横幅が広がる
-                    Dismissible(
-                      key:Key(list[index].toString()),
-                      child: Notecard(title: list[index]['category'].toString()),
-                      direction: DismissDirection.horizontal,
-                    )
-                  ]),
-                );
-                
-              }
-            }
+        child: FutureBuilder<List<Note>>(
+          future: dbProvider.getNotes(),
+          initialData: [],
+          builder: (BuildContext context, snapshot) {
+            var data = snapshot.data;
+            var datalength = data!.length; // !はnullではない事を意味する
+
+           return datalength == 0
+
+           ? const Center(
+              child: Text('記録がありません'),
+           )
+           : ListView.builder(
+                itemCount: list.length,
+                itemBuilder: (_, index) {
+                  bool isSameDate = true;
+                  final String dateString = list[index]['time'];
+                  final DateTime date = DateTime.parse(dateString); // DateTme型に変換
+                  final item = list[index];
+                  if (index == 0) {
+                    isSameDate = false;
+                  } else {
+                    final String prevDateString = list[index - 1]['time'];
+                    final DateTime prevDate = DateTime.parse(prevDateString);
+                    isSameDate = date.isSameDate(prevDate);
+                  }
+                  if (index == 0 || !(isSameDate)) {
+                    return Padding(
+                      padding: EdgeInsets.all(2), // 隣のColumnとの間に余白を付ける
+                      child: Column(children: [
+                        Text(date.formatDate()),
+                        Dismissible(
+                          key: Key(list[index].toString()), 
+                          child: Notecard(title: list[index]['category'].toString()),
+                          direction: DismissDirection.horizontal,
+                        )
+                      ]),
+                    );
+                  } else {
+                    return Padding(
+                      padding: EdgeInsets.all(2), // 隣のColumnとの間に余白を付ける
+                      child: Column(children: [ // Columnがないと横幅が広がる
+                        Dismissible(
+                          key:Key(list[index].toString()),
+                          child: Notecard(title: list[index]['category'].toString()),
+                          direction: DismissDirection.horizontal,
+                        )
+                      ]),
+                    );
+                    
+                  }
+                }
+            );
+          }
+          ),
         ),
-      ), 
+
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+          onPressed: () {
+            Navigator.push(context, 
+            MaterialPageRoute<bool>(
+              builder: (context) => AddNote()
+            )
+          ).then((value) {   // thenがないと即時反映されない
+            setState(() {});
+          });    
+          },
+          tooltip: 'Add Note',
+          child: const Icon(Icons.add),
+        ),
     );
   }
 }

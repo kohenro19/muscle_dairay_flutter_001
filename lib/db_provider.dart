@@ -76,7 +76,7 @@ class DBProvider {
 
  Future<List<Note>> getNotes() async {
     final db = await database;
-    final List<Map<String, dynamic>> maps = await db.query('no');
+    final List<Map<String, dynamic>> maps = await db.query('note');
     return List.generate(maps.length, (index) {
       return Note(
         no: maps[index]['no'],
