@@ -41,7 +41,7 @@ class DBProvider {
       version: _databaseVersion,
       onCreate: (db, version) async {
         await db.execute('''
-            CREATE TABLE favorite(
+            CREATE TABLE note(
             no INTERGER,
             category String,
             workout String,
@@ -54,7 +54,7 @@ class DBProvider {
   }
 
   // function to add data into the database.
-  Future<void> insertNotesg(Note note) async {
+  Future<void> insertNotes(Note note) async {
     final db = await database;
     await db.insert(
       'note',
@@ -88,7 +88,7 @@ class DBProvider {
     });
   }
 
-   Future<void> updateUser(int id, String category, String exercise, int weight) async {
+   Future<void> updateNote(int id, String category, String exercise, int weight) async {
     final db = await database;
     await db.update(
       'note',

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'note_card.dart';
-import 'dart:typed_data';
+import 'db_provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -56,18 +56,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  final dbProvider = DBProvider();
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  @override
+  void initState() {  // アプリ起動時に最新のお気に入り状態を表示する為に、initStateを実装
+    super.initState();
+    // dbProvider._initDatabase(); // _が先頭につくと、外部参照不可なのでエラーが出る
+    dbProvider.getNotes();  // データを更新するメソッドを呼び出す
   }
+
     List<Map> list = [
     {
       "time": "2020-06-16T10:31:12.000Z",
