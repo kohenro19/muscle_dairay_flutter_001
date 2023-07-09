@@ -8,7 +8,17 @@ class AddNote extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text("test")),
+      appBar: AppBar(
+        centerTitle: true,
+        leading: GestureDetector( // leadingは、戻りの矢印
+        onTap: () {Navigator.pop(context);}, // 前のページに戻るときはpopを使う
+        child: Icon(Icons.arrow_back, color: Colors.white)
+      ),
+      title: const Text('Muscle Diary',
+      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      )
+      ),
+      body: Center(child: Text("Muscle Diary")),
     );
     
   }
