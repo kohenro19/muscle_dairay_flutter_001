@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:muscle_dairay/db_provider.dart';
+import 'package:muscle_dairay/Note.dart';
 
 class AddNote extends StatefulWidget {
   const AddNote({Key? key}) : super(key: key);
@@ -10,14 +12,16 @@ class AddNote extends StatefulWidget {
 class _AddNoteState extends State<AddNote> {
 
     Map<String, List<String>> _dropDownMenu = {
-    'Study': ['Math', 'Englsih', 'Japanese'],
-    'Workout': ['Shoulder', 'Chest', 'Back'],
-    'Coding': ['Flutter', 'Python', 'C#']
+    '肩': ['Math', 'Englsih', 'Japanese'],
+    '大胸筋': ['Shoulder', 'Chest', 'Back'],
+    '大腿': ['Flutter', 'Python', 'C#']
   };
 
-   String? _selectedKey;
+   String? _selectedCategory;  // ?はnullになってもいい記号
    String? _selectedItem;
-  //  late String newValue;
+ 
+
+  final dbProvider = DBProvider();
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +42,11 @@ class _AddNoteState extends State<AddNote> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Text(
-                'What did you do?',
+                '種目',
                 style: TextStyle(fontSize: 24),
               ),
               DropdownButton<String>(
-                value: _selectedKey,
+                value: _selectedCategory,
                 icon: Icon(Icons.arrow_drop_down),
                 iconSize: 30,
                 elevation: 16,
@@ -54,8 +58,8 @@ class _AddNoteState extends State<AddNote> {
 
                 onChanged: (newValue) {
                   setState(() {
-                    _selectedKey = newValue!;
-                    _selectedItem = _dropDownMenu[_selectedKey]![0];
+                    _selectedCategory = newValue!; // !はnullじゃないと確定する記号
+                    _selectedItem = _dropDownMenu[_selectedCategory]![0];
                   });
                 },
                 items: _dropDownMenu.keys
@@ -68,7 +72,7 @@ class _AddNoteState extends State<AddNote> {
               ),
             ],
           ),
-          _selectedKey != null
+          _selectedCategory != null
               ? Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
@@ -91,7 +95,7 @@ class _AddNoteState extends State<AddNote> {
                           _selectedItem = newValue!;
                         });
                       },
-                      items: _dropDownMenu[_selectedKey]
+                      items: _dropDownMenu[_selectedCategory]
                           ?.map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
@@ -102,8 +106,27 @@ class _AddNoteState extends State<AddNote> {
                   ],
                 )
               : Container(),
+
+        Container(
+          child: ElevatedButton(
+            child: Text('記録'),
+            onPressed: () async {
+              dbProvider.addNote(Note(
+                no: 1,
+                date: DateTime(2023, 07, 11).toString(),
+                category: "肩",
+                exercise: "サイドレイズ",
+                weight: 80
+              ));
+
+            },
+
+
+          ),
+        )
         ],
       ),
+    
     );
   
     

@@ -125,16 +125,16 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text('記録がありません'),
            )
            : ListView.builder(
-                itemCount: list.length,
+                itemCount: data.length,
                 itemBuilder: (_, index) {
                   bool isSameDate = true;
-                  final String dateString = list[index]['time'];
+                  final String dateString = data[index]['time'];
                   final DateTime date = DateTime.parse(dateString); // DateTme型に変換
-                  final item = list[index];
+                  final item = data[index];
                   if (index == 0) {
                     isSameDate = false;
                   } else {
-                    final String prevDateString = list[index - 1]['time'];
+                    final String prevDateString = data[index - 1]['time'];
                     final DateTime prevDate = DateTime.parse(prevDateString);
                     isSameDate = date.isSameDate(prevDate);
                   }

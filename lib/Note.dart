@@ -1,12 +1,12 @@
 class Note {
-  int no;
-  DateTime date;
+  int? no;
+  String date;
   String category;
   String exercise;
   int weight;
 
   Note({
-   required this.no,
+   this.no,
    required this.date,
    required this.category,
    required this.exercise,

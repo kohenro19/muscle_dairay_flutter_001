@@ -43,8 +43,9 @@ class DBProvider {
         await db.execute('''
             CREATE TABLE note(
             no INTERGER,
+            date String,
             category String,
-            workout String,
+            exercise String,
             weight INTERGER
             ) '''         
         );
@@ -54,7 +55,7 @@ class DBProvider {
   }
 
   // function to add data into the database.
-  Future<void> insertNotes(Note note) async {
+  Future<void> addNote(Note note) async {
     final db = await database;
     await db.insert(
       'note',
