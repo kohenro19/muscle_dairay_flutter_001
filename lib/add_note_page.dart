@@ -112,8 +112,7 @@ class _AddNoteState extends State<AddNote> {
             child: Text('記録'),
             onPressed: () async {
               dbProvider.addNote(Note(
-                no: 1,
-                date: DateTime(2023, 07, 11).toString(),
+                date: DateTime(2023, 07, 12).toString(),
                 category: "肩",
                 exercise: "サイドレイズ",
                 weight: 80

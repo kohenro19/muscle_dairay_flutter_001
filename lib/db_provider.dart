@@ -21,16 +21,6 @@ class DBProvider {
     return _database!;
   }
 
-  void _createTableV1(Batch batch) {
-    batch.execute('''
-    CREATE TABLE note(
-      no INTERGER,
-      category String,
-      workout String,
-      weight INTERGER
-    ) ''');
-  }
-
   //this opens the database (and creates it if it doesn't exist)
   Future<Database> _initDatabase() async {
     final Directory documentsDirectory =
@@ -42,7 +32,7 @@ class DBProvider {
       onCreate: (db, version) async {
         await db.execute('''
             CREATE TABLE note(
-            no INTERGER,
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
             date String,
             category String,
             exercise String,
@@ -65,12 +55,12 @@ class DBProvider {
   }
 
   // function to delete data form the database.
-  Future<int> deleteNote(int no) async {
+  Future<int> deleteNote(int id) async {
     final db = await database;
     int result = await db.delete(
       'note',
-      where: 'no == ?',
-      whereArgs: [no],
+      where: 'id == ?',
+      whereArgs: [id],
     );
     return result;
   }
@@ -80,7 +70,6 @@ class DBProvider {
     final List<Map<String, dynamic>> maps = await db.query('note');
     return List.generate(maps.length, (index) {
       return Note(
-        no: maps[index]['no'],
         date: maps[index]['date'],
         category: maps[index]['category'],
         exercise: maps[index]['exercise'],
@@ -93,7 +82,7 @@ class DBProvider {
     final db = await database;
     await db.update(
       'note',
-      {'category': category, 'exercise': exercise, 'weigth': weight},
+      {'category': category, 'exercise': exercise, 'weigtht': weight},
       where: 'id = ?',
       whereArgs: [id],
     );

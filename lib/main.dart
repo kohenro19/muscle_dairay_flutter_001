@@ -128,13 +128,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 itemCount: data.length,
                 itemBuilder: (_, index) {
                   bool isSameDate = true;
-                  final String dateString = data[index]['time'];
+                  final String dateString = data[index].date;
                   final DateTime date = DateTime.parse(dateString); // DateTme型に変換
                   final item = data[index];
                   if (index == 0) {
                     isSameDate = false;
                   } else {
-                    final String prevDateString = data[index - 1]['time'];
+                    final String prevDateString = data[index - 1].date;
                     final DateTime prevDate = DateTime.parse(prevDateString);
                     isSameDate = date.isSameDate(prevDate);
                   }
