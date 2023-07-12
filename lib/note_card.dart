@@ -1,15 +1,22 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:muscle_dairay/Note.dart';
 import 'note.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
 class Notecard extends StatefulWidget {
-  final String title;
+  final String category;
+  final String exercise;
+  final int weight;
 
   const Notecard({
     // required this.id,
-    required this.title,
+    required this.category,
+    required this.exercise,
+    required this.weight,
+
      Key? key }) : super(key: key);
 
   @override
@@ -52,7 +59,7 @@ class _NotecardState extends State<Notecard> {
                     SizedBox(width: 10),
                     CircleAvatar(
                       radius: 30,
-                      child: Text("肩"),
+                      child: Text(widget.category),
                     ),
                     SizedBox(width: 30),
                   // Padding(
@@ -62,7 +69,7 @@ class _NotecardState extends State<Notecard> {
                         Container(
                         // color: Colors.blue,
                         width: 120,
-                        child: Text("サイドレイズ",
+                        child: Text(widget.exercise,
                           style: TextStyle(
                           // fontWeight: FontWeight.bold,
                           fontSize: 18,
@@ -72,7 +79,7 @@ class _NotecardState extends State<Notecard> {
                       ),
                       SizedBox(width: 40),
                       Container(
-                        child: Text("80kg", style: TextStyle(fontSize: 18),),
+                        child: Text(widget.weight.toString()+"kg", style: TextStyle(fontSize: 18),),
                       ),
                       SizedBox(width: 40),
                       IconButton(onPressed: () {

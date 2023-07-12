@@ -82,7 +82,7 @@ class DBProvider {
     final db = await database;
     await db.update(
       'note',
-      {'category': category, 'exercise': exercise, 'weigtht': weight},
+      {'category': category, 'exercise': exercise, 'weight': weight},
       where: 'id = ?',
       whereArgs: [id],
     );

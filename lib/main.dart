@@ -144,8 +144,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Column(children: [
                         Text(date.formatDate()),
                         Dismissible(
-                          key: Key(list[index].toString()), 
-                          child: Notecard(title: list[index]['category'].toString()),
+                          key: Key(data[index].toString()), 
+                          child: Notecard(category: data[index].category, exercise: data[index].exercise, weight: data[index].weight),
                           direction: DismissDirection.horizontal,
                         )
                       ]),
@@ -155,8 +155,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       padding: EdgeInsets.all(2), // 隣のColumnとの間に余白を付ける
                       child: Column(children: [ // Columnがないと横幅が広がる
                         Dismissible(
-                          key:Key(list[index].toString()),
-                          child: Notecard(title: list[index]['category'].toString()),
+                          key:Key(data[index].toString()),
+                          child: Notecard(category: data[index].category, exercise: data[index].exercise, weight: data[index].weight),
                           direction: DismissDirection.horizontal,
                         )
                       ]),
