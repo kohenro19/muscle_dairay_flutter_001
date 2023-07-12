@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:muscle_dairay/db_provider.dart';
 import 'package:muscle_dairay/Note.dart';
+import 'package:numberpicker/numberpicker.dart';
 
 class AddNote extends StatefulWidget {
   const AddNote({Key? key}) : super(key: key);
@@ -12,14 +13,14 @@ class AddNote extends StatefulWidget {
 class _AddNoteState extends State<AddNote> {
 
     Map<String, List<String>> _dropDownMenu = {
-    '肩': ['Math', 'Englsih', 'Japanese'],
-    '大胸筋': ['Shoulder', 'Chest', 'Back'],
-    '大腿': ['Flutter', 'Python', 'C#']
+    '肩': ['サイドレイズ', 'ショルダープレス',],
+    '大胸筋': ['ベンチプレス'],
+    '大腿': ['スクワット']
   };
 
    String? _selectedCategory;  // ?はnullになってもいい記号
    String? _selectedItem;
- 
+   int _currentValue = 50;
 
   final dbProvider = DBProvider();
 
@@ -42,7 +43,7 @@ class _AddNoteState extends State<AddNote> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Text(
-                '種目',
+                '部位は？',
                 style: TextStyle(fontSize: 24),
               ),
               DropdownButton<String>(
@@ -77,7 +78,7 @@ class _AddNoteState extends State<AddNote> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     Text(
-                      'Which one?',
+                      '種目は?',
                       style: TextStyle(fontSize: 24),
                     ),
                     DropdownButton<String>(
@@ -106,16 +107,22 @@ class _AddNoteState extends State<AddNote> {
                   ],
                 )
               : Container(),
-
+              NumberPicker(
+                value: _currentValue,
+                minValue: 0,
+                maxValue: 100,
+                onChanged: (value) => setState(() => _currentValue = value),
+                    ),
+              Text('Current value: $_currentValue'),
         Container(
           child: ElevatedButton(
             child: Text('記録'),
             onPressed: () async {
               dbProvider.addNote(Note(
-                date: DateTime(2023, 07, 12).toString(),
-                category: "肩",
-                exercise: "サイドレイズ",
-                weight: 80
+                date: DateTime.now().toString(), // 今日の日付を入れる
+                category: _selectedCategory!,
+                exercise: _selectedItem!,
+                weight: _currentValue
               ));
 
             },
