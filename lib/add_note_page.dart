@@ -119,7 +119,7 @@ class _AddNoteState extends State<AddNote> {
             child: Text('記録'),
             onPressed: () async {
               dbProvider.addNote(Note(
-                date: DateTime.now().toString(), // 今日の日付を入れる
+                date: DateTime(2023, 07, 15, 0, 0).toString(), // 今日の日付を入れる
                 category: _selectedCategory!,
                 exercise: _selectedItem!,
                 weight: _currentValue

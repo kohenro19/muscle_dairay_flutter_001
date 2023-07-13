@@ -125,6 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text('記録がありません'),
            )
            : ListView.builder(
+                // reverse: true,
                 itemCount: data.length,
                 itemBuilder: (_, index) {
                   bool isSameDate = true;
